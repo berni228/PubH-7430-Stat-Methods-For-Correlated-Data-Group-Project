@@ -11,8 +11,13 @@ library(tidyverse)
 library(knitr)
 
 data <- read_csv("health_fitness_dataset.csv") 
+```
 
+# Exploratory Analysis
 
+## Looking at all particiapnts
+
+``` r
 data %>%
   # count observations per participant (cluster)
   group_by(participant_id) %>%
@@ -21,7 +26,7 @@ data %>%
     n_clusters = n(),                     # number of unique participants
     avg_obs_per_cluster = mean(n_obs)
   ) %>%
-  kable()
+  kable() # outputs into nice table :D
 ```
 
 | n_clusters | avg_obs_per_cluster |
@@ -31,7 +36,7 @@ data %>%
 In the entire dataset, there are 3000 participants. With 229
 observations on average per participant.
 
-# Looking at participants with diabetes
+## Looking at participants with diabetes
 
 Filtering for rows where `health_condition` = Diabetes
 

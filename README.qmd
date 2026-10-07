@@ -1,6 +1,9 @@
 ---
-title: "Group Project R Code and Report"
+title: "Group Project R Code "
 format: gfm
+execute:
+  warning: false
+  message: false
 ---
 
 Loading in data and setting up environment
@@ -15,7 +18,7 @@ data <- read_csv("health_fitness_dataset.csv")
 
 ```
 
-Filtering for rows that 
+Filtering for rows where `health_condition` = Diabetes
 ```{r}
 diabetes_data <- data %>%
   filter(health_condition == "Diabetes")

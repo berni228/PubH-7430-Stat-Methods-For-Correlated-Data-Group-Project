@@ -1,0 +1,25 @@
+---
+title: "Group Project R Code and Report"
+format: gfm
+---
+
+Loading in data and setting up environment
+```{r}
+
+rm(list = ls()) # clears environment
+
+library(readr)
+library(tidyverse)
+
+data <- read_csv("health_fitness_dataset.csv") 
+
+```
+
+Filtering for rows that 
+```{r}
+diabetes_data <- data %>%
+  filter(health_condition == "Diabetes")
+
+
+```
+

@@ -1,6 +1,11 @@
 # Group Project R Code
 
 
+# health and Fitness dataset
+
+[Link to
+Dataset](https://www.kaggle.com/datasets/evan65549/health-and-fitness-dataset/data)
+
 Loading in data and setting up environment
 
 ``` r
@@ -12,8 +17,6 @@ library(knitr)
 
 data <- read_csv("health_fitness_dataset.csv") 
 ```
-
-# Exploratory Analysis
 
 ## Looking at all particiapnts
 
@@ -62,4 +65,31 @@ diabetes_data %>%
 |        283 |            228.8127 |
 
 There are 283 participants with diabetes in this dataset. With 229
+observations on average per participant.
+
+# Chronic Disease EHR Dataset
+
+[Link to
+Dataset](https://www.kaggle.com/datasets/zara2099/chronic-disease-ehr-dataset?resource=download)
+
+``` r
+chronic_data <- read_csv("Chronic_Disease_EHR_Dataset.csv") 
+```
+
+``` r
+chronic_data %>%
+  group_by(Patient_ID) %>%
+  summarize(n_obs = n(), .groups = "drop") %>%
+  summarize(
+    n_clusters = n(),                     # number of unique participants
+    avg_obs_per_cluster = mean(n_obs)
+  ) %>%
+  kable()
+```
+
+| n_clusters | avg_obs_per_cluster |
+|-----------:|--------------------:|
+|       1750 |                   4 |
+
+There are 1750 participants with diabetes in this dataset. With 4
 observations on average per participant.

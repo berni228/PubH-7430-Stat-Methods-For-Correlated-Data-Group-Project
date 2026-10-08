@@ -10,6 +10,7 @@ Dataset](https://www.kaggle.com/datasets/zara2099/chronic-disease-ehr-dataset?re
 library(readr)
 library(tidyverse)
 library(knitr)
+library(ggplot2)
 
 chronic_data <- read_csv("Chronic_Disease_EHR_Dataset.csv") 
 ```
@@ -31,32 +32,3 @@ chronic_data %>%
 
 There are 1750 participants in this dataset. With 4 observations on
 average per participant.
-
-# Movie Dataset
-
-[Link to
-Dataset](https://www.kaggle.com/datasets/grouplens/movielens-20m-dataset/data?select=rating.csv)
-
-``` r
-genome_scores <- read_csv("Movie Datasets/genome_scores.csv")
-
-genome_tags <- read_csv("Movie Datasets/genome_tags.csv")
-
-link <- read_csv("Movie Datasets/link.csv")
-
-rating <- read_csv("Movie Datasets/rating.csv")
-
-
-rating %>%
-  group_by(userId) %>%
-  summarize(n_obs = n(), .groups = "drop") %>%
-  summarize(
-    n_clusters = n(),                     # number of unique participants
-    avg_obs_per_cluster = mean(n_obs)
-  ) %>%
-  kable()
-```
-
-| n_clusters | avg_obs_per_cluster |
-|-----------:|--------------------:|
-|     138493 |            144.4135 |

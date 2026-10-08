@@ -91,5 +91,5 @@ chronic_data %>%
 |-----------:|--------------------:|
 |       1750 |                   4 |
 
-There are 1750 participants with diabetes in this dataset. With 4
-observations on average per participant.
+There are 1750 participants in this dataset. With 4 observations on
+average per participant.

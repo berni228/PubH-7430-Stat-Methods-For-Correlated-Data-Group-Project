@@ -1,78 +1,16 @@
 # Group Project R Code
 
 
-# health and Fitness dataset
-
-[Link to
-Dataset](https://www.kaggle.com/datasets/evan65549/health-and-fitness-dataset/data)
-
-Loading in data and setting up environment
-
-``` r
-rm(list = ls()) # clears environment
-
-library(readr)
-library(tidyverse)
-library(knitr)
-
-data <- read_csv("health_fitness_dataset.csv") 
-```
-
-## Looking at all particiapnts
-
-``` r
-data %>%
-  # count observations per participant (cluster)
-  group_by(participant_id) %>%
-  summarize(n_obs = n(), .groups = "drop") %>%
-  summarize(
-    n_clusters = n(),                     # number of unique participants
-    avg_obs_per_cluster = mean(n_obs)
-  ) %>%
-  kable() # outputs into nice table :D
-```
-
-| n_clusters | avg_obs_per_cluster |
-|-----------:|--------------------:|
-|       3000 |            229.2337 |
-
-In the entire dataset, there are 3000 participants. With 229
-observations on average per participant.
-
-## Looking at participants with diabetes
-
-Filtering for rows where `health_condition` = Diabetes
-
-``` r
-diabetes_data <- data %>%
-  filter(health_condition == "Diabetes")
-```
-
-``` r
-diabetes_data %>%
-  # count observations per participant (cluster)
-  group_by(participant_id) %>%
-  summarize(n_obs = n(), .groups = "drop") %>%
-  summarize(
-    n_clusters = n(),                     # number of unique participants
-    avg_obs_per_cluster = mean(n_obs)
-  ) %>%
-  kable()
-```
-
-| n_clusters | avg_obs_per_cluster |
-|-----------:|--------------------:|
-|        283 |            228.8127 |
-
-There are 283 participants with diabetes in this dataset. With 229
-observations on average per participant.
-
 # Chronic Disease EHR Dataset
 
 [Link to
 Dataset](https://www.kaggle.com/datasets/zara2099/chronic-disease-ehr-dataset?resource=download)
 
 ``` r
+library(readr)
+library(tidyverse)
+library(knitr)
+
 chronic_data <- read_csv("Chronic_Disease_EHR_Dataset.csv") 
 ```
 
@@ -84,7 +22,7 @@ chronic_data %>%
     n_clusters = n(),                     # number of unique participants
     avg_obs_per_cluster = mean(n_obs)
   ) %>%
-  kable()
+  kable() # outputs into nice table :D
 ```
 
 | n_clusters | avg_obs_per_cluster |
@@ -93,3 +31,32 @@ chronic_data %>%
 
 There are 1750 participants in this dataset. With 4 observations on
 average per participant.
+
+# Movie Dataset
+
+[Link to
+Dataset](https://www.kaggle.com/datasets/grouplens/movielens-20m-dataset/data?select=rating.csv)
+
+``` r
+genome_scores <- read_csv("Movie Datasets/genome_scores.csv")
+
+genome_tags <- read_csv("Movie Datasets/genome_tags.csv")
+
+link <- read_csv("Movie Datasets/link.csv")
+
+rating <- read_csv("Movie Datasets/rating.csv")
+
+
+rating %>%
+  group_by(userId) %>%
+  summarize(n_obs = n(), .groups = "drop") %>%
+  summarize(
+    n_clusters = n(),                     # number of unique participants
+    avg_obs_per_cluster = mean(n_obs)
+  ) %>%
+  kable()
+```
+
+| n_clusters | avg_obs_per_cluster |
+|-----------:|--------------------:|
+|     138493 |            144.4135 |

@@ -21,8 +21,8 @@ library(ggplot2)
 chronic_data <- read_csv("Chronic_Disease_EHR_Dataset.csv") 
 
 
-
 ```
+
 ```{r}
 chronic_data %>%
   group_by(Patient_ID) %>%
@@ -34,5 +34,39 @@ chronic_data %>%
   kable() # outputs into nice table :D
 ```
 
-There are 1750 participants in this dataset. With 4 observations on average per participant. 
+There are 1750 participants in this data set. With 4 observations on average per participant. 
+
+# Exploratory Data Analysis
+
+Our Primary outcome of interest is `Estimated_GFR`. or estimated glomerular filtration rate (eGFR), a continuous measure of kidney function.
+ 
+
+
+```{r}
+#| label: fig-spaghettiplot-GFR-Vist
+#| fig-cap: "Spaghetti Plot of Estimated GFR by Visit Number"
+
+
+# Taking a sample of the data so that it doesn't look so cluttered in the plot
+set.seed(123)
+
+n_subjects <- 200
+
+sampled_ids <- chronic_data %>%
+  distinct(Patient_ID) %>%
+  slice_sample(n = n_subjects)
+
+sample_data <- chronic_data %>%
+  semi_join(sampled_ids, by = "Patient_ID")
+
+
+# Spaghetti Plot
+ggplot(sample_data, aes(x= Visit_Number, y = Estimated_GFR, group = Patient_ID )) +
+  geom_line(alpha = 0.5) +
+  geom_point(alpha = 0.4) +
+  facet_wrap(~ Diabetes_Status)
+```
+
+
+
 

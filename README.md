@@ -30,5 +30,40 @@ chronic_data %>%
 |-----------:|--------------------:|
 |       1750 |                   4 |
 
-There are 1750 participants in this dataset. With 4 observations on
+There are 1750 participants in this data set. With 4 observations on
 average per participant.
+
+# Exploratory Data Analysis
+
+Our Primary outcome of interest is `Estimated_GFR`. or estimated
+glomerular filtration rate (eGFR), a continuous measure of kidney
+function.
+
+``` r
+# Taking a sample of the data so that it doesn't look so cluttered in the plot
+set.seed(123)
+
+n_subjects <- 200
+
+sampled_ids <- chronic_data %>%
+  distinct(Patient_ID) %>%
+  slice_sample(n = n_subjects)
+
+sample_data <- chronic_data %>%
+  semi_join(sampled_ids, by = "Patient_ID")
+
+
+# Spaghetti Plot
+ggplot(sample_data, aes(x= Visit_Number, y = Estimated_GFR, group = Patient_ID )) +
+  geom_line(alpha = 0.5) +
+  geom_point(alpha = 0.4) +
+  facet_wrap(~ Diabetes_Status)
+```
+
+<div id="fig-spaghettiplot-GFR-Vist">
+
+![](README_files/figure-commonmark/fig-spaghettiplot-GFR-Vist-1.png)
+
+Figure 1: Spaghetti Plot of Estimated GFR by Visit Number
+
+</div>

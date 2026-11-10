@@ -17,6 +17,8 @@ library(readr)
 library(tidyverse)
 library(knitr)
 library(ggplot2)
+library(gtsummary)
+library(gt)
 
 chronic_data <- read_csv("Chronic_Disease_EHR_Dataset.csv") 
 
@@ -135,5 +137,45 @@ We will be fitting a GLM with an identity link.
 
 ```
 
+# Table 1
+
+```{r}
+sample_data_wide <- reshape(data = sample_data,
+                            idvar = "Patient_ID",
+                            v.names = "Estimated_GFR",
+                            timevar = "Months_From_Baseline",
+                            direction = "wide")
+
+sample_data_wide$Hypertension_Status <- sample_data_wide$Hypertension_Status %>%
+  as.factor() %>%
+  relevel(ref = "No")
+
+sample_data_wide$Diabetes_Status <- sample_data_wide$Diabetes_Status %>%
+  as.factor() %>%
+  relevel(ref = "No")
+
+sample_data_wide$Medication_Adherence <- sample_data_wide$Medication_Adherence %>%
+  as.factor() %>%
+  factor(levels = c("Low", "Moderate", "High"))
+
+table1 <- tbl_summary(
+  sample_data_wide,
+  by = Diabetes_Status,
+  include = c(Hypertension_Status,
+              Age, Sex, Body_Mass_Index, Medication_Adherence),
+  label = list(
+    Hypertension_Status ~ "Participant has hypertension",
+    Medication_Adherence ~ "Medication adherence",
+    Body_Mass_Index ~ "Body mass index (kg/m^2)",
+    Age ~ "Age (years), baseline"
+    )
+  ) %>%
+  modify_header(
+                stat_1 = "Participant does not have diabetes (N = {n})",
+                stat_2 = "Participant has diabetes (N = {n})"
+  ) %>%
+  modify_caption(caption = "Summary of covariates at baseline.")
+table1
+```
 
 

@@ -39,13 +39,48 @@ There are 1750 participants in this data set. With 4 observations on average per
 # Exploratory Data Analysis
 
 Our Primary outcome of interest is `Estimated_GFR`. or estimated glomerular filtration rate (eGFR), a continuous measure of kidney function.
+
+
+```{r}
+#| label: fig-boxplot-GFR-Sex-Diabetes
+#| fig-cap: "Box-Plot of Estimated GFR by Sex and Diabetes Status"
+
+ggplot(chronic_data, aes(x = Sex, y = Estimated_GFR, fill = Diabetes_Status)) +
+  geom_boxplot() +
+  theme(legend.position = "top") 
+
+```
+
  
+```{r}
+#| label: fig-scatterplot-GFR-Age-Sex-Diabetes
+#| fig-cap: "Scatter Plot of Estimated GFR by Age, grouped by Sex and Diabetes Status"
+
+ggplot(chronic_data, aes(x = Age, y = Estimated_GFR, color = Diabetes_Status)) +
+  geom_point(alpha = 0.75) +
+  facet_wrap( ~ Sex) +
+  theme(legend.position = "top") 
+
+```
+
+```{r}
+#| label: fig-scatterplot-GFR-BMI-Sex-Diabetes
+#| fig-cap: "Scatter Plot of Estimated GFR by BMI, grouped by Sex and Diabetes Status"
+
+ggplot(chronic_data, aes(x = Body_Mass_Index, y = Estimated_GFR, color = Diabetes_Status)) +
+  geom_point(alpha = 0.75) +
+  facet_wrap( ~ Sex) +
+  theme(legend.position = "top") 
+
+
+```
+
+
 
 
 ```{r}
 #| label: fig-spaghettiplot-GFR-Vist
-#| fig-cap: "Spaghetti Plot of Estimated GFR by Visit Number"
-
+#| fig-cap: "Spaghetti Plot of Estimated GFR by Visit Number, grouped by Diabetes Status"
 
 # Taking a sample of the data so that it doesn't look so cluttered in the plot
 set.seed(123)
@@ -64,9 +99,34 @@ sample_data <- chronic_data %>%
 ggplot(sample_data, aes(x= Visit_Number, y = Estimated_GFR, group = Patient_ID )) +
   geom_line(alpha = 0.5) +
   geom_point(alpha = 0.4) +
-  facet_wrap(~ Diabetes_Status)
+  facet_wrap(~ Diabetes_Status) 
 ```
 
+
+```{r}
+
+ggplot(chronic_data, (aes(x = Visit_Number, y = Estimated_GFR))) +
+  geom_point(alpha = 0.5)
+
+
+
+```
+
+
+
+
+
+# Fitting the Model
+
+We will be fitting a GLM with an identity link.
+
+
+```{r}
+
+
+
+
+```
 
 
 

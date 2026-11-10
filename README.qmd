@@ -10,7 +10,6 @@ execute:
 
 [Link to Dataset](https://www.kaggle.com/datasets/zara2099/chronic-disease-ehr-dataset?resource=download)
 
-
 ```{r}
 
 library(readr)
@@ -128,12 +127,15 @@ ggplot(sample_data, aes(x= Visit_Number, y = Estimated_GFR, group = Patient_ID )
 We will be fitting a GLM with an identity link.
 
 
+## Diabetes Model
 ```{r}
 
 
 
 
 ```
+
+
 
 
 

@@ -133,3 +133,5 @@ Diabetes Status
 # Fitting the Model
 
 We will be fitting a GLM with an identity link.
+
+## Diabetes Model

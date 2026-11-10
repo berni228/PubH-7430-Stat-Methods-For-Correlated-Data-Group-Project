@@ -75,6 +75,14 @@ ggplot(chronic_data, aes(x = Body_Mass_Index, y = Estimated_GFR, color = Diabete
 
 ```
 
+```{r}
+#| label: fig-boxplot-GFR-Visit-Diabetes
+#| fig-cap: "BoxPlot of Estimated GFR over time (Visit Number), by Diabetes Status"
+
+ggplot(chronic_data, (aes(x = as.factor(Visit_Number), y = Estimated_GFR, fill = Diabetes_Status))) +
+  geom_boxplot() +
+  theme(legend.position = "top") 
+```
 
 
 
@@ -105,8 +113,7 @@ ggplot(sample_data, aes(x= Visit_Number, y = Estimated_GFR, group = Patient_ID )
 
 ```{r}
 
-ggplot(chronic_data, (aes(x = Visit_Number, y = Estimated_GFR))) +
-  geom_point(alpha = 0.5)
+
 
 
 
